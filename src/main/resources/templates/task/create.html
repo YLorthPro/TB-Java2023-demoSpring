@@ -16,6 +16,7 @@
         <div>
             <label for="in-description">Description :</label>
             <input type="text" th:field="${task.description}" id="in-description"/>
+            <span th:if="${#fields.hasErrors('task.description')}" th:errors="${task.description}" style="color: red"></span>
         </div>
 
         <div>
