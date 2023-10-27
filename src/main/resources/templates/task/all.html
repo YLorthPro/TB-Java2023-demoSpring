@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" name="viewport">
+    <title>acceuil</title>
+</head>
+<body>
+
+    <h1>To-do List</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Terminée</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="task : ${set}" >
+                <td th:text="${task.name()}"/>
+                <td th:text="${task.description()}"/>
+                <td th:text="${task.date()}"/>
+                <td th:text="${task.status()}"/>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="/task/create">Ajouter une tâche</a>
+
+</body>
+</html>
