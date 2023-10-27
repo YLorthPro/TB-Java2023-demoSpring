@@ -1,5 +1,6 @@
 package be.bstorm.formation.utils;
 
+
 import be.bstorm.formation.models.entities.Status;
 import be.bstorm.formation.models.entities.TaskEntity;
 import be.bstorm.formation.repository.TaskRepository;
@@ -17,13 +18,15 @@ public class DataInit implements InitializingBean {
         this.taskRepository = taskRepository;
     }
 
+
     @Override
     public void afterPropertiesSet() throws Exception {
-        TaskEntity task = new TaskEntity();
-        task.setName("test");
-        task.setDescription("test");
-        task.setStatus(Status.PENDING);
-        task.setDate(LocalDate.now());
-        taskRepository.save(task);
+        TaskEntity tache = new TaskEntity();
+        tache.setName("test");
+        tache.setDescription("retest");
+        tache.setDate(LocalDate.now());
+        tache.setStatus(Status.PENDING);
+        
+        taskRepository.save(tache);
     }
 }
