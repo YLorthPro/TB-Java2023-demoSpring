@@ -27,5 +27,6 @@ public class TaskEntity {
     @Enumerated(value = EnumType.ORDINAL)
     private Status status;
     
+    
 }
 

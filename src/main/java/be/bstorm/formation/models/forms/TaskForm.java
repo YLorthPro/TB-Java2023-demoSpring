@@ -14,6 +14,7 @@ import java.time.temporal.ChronoUnit;
 
 @Data
 public class TaskForm{
+    @InFuture(amount = 1, unit = ChronoUnit.WEEKS, message = "Yabadabadooooooo")
     private LocalDate date;
     @NotBlank
     @Size(min = 4)

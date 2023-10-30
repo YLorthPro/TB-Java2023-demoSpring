@@ -9,6 +9,7 @@ import java.time.LocalDate;
 
 @Builder
 public record Task (
+    Long id,
     LocalDate date,
     String name,
     String description,
@@ -16,6 +17,6 @@ public record Task (
     ){
     
     public static Task toDTO(TaskEntity entity){
-        return new Task(entity.getDate(), entity.getName(), entity.getDescription(), entity.getStatus());
+        return new Task(entity.getId(),entity.getDate(), entity.getName(), entity.getDescription(), entity.getStatus());
     }
 }

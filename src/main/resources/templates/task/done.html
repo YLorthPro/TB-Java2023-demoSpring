@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="~{ /fragment/fragments :: css }"></th:block>
+</head>
+<body>
+
+<th:block th:replace="~{ /fragment/fragments :: header }"></th:block>
+    <h1>Done</h1>
+    
+    <table>
+        <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Terminée</th>
+    
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="task : ${set}" >
+            <td th:text="${task.name()}"/>
+            <td th:text="${task.description()}"/>
+            <td th:text="${task.date()}"/>
+            <td th:text="${task.status()}"/>
+    
+        </tr>
+        </tbody>
+    </table>
+
+<a href="/task/create">Ajouter une tâche</a>
+
+<th:block th:replace="~{ /fragment/fragments :: footer }"></th:block>
+</body>
+</html>

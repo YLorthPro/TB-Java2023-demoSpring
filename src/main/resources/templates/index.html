@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <th:block th:replace="~{ /fragment/fragments :: css }"></th:block>
 </head>
 <body>
+<th:block th:replace="~{ /fragment/fragments :: header }"></th:block>
+
     <h1>Bienvenue</h1>
     <a href="/task/create">Créer une tache</a>
+<th:block th:replace="~{ /fragment/fragments :: footer }"></th:block>
 </body>
 </html>

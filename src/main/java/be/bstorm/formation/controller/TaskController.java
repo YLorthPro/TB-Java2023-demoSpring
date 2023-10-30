@@ -44,28 +44,28 @@ public class TaskController {
         return "/task/all";
     }
 
-    @PutMapping("/{id}")
+    @GetMapping("/{id}")
     public String finished(@PathVariable Long id){
         taskService.complete(id);
-        return "redirect:/task";
+        return "redirect:/task/done";
     }
 
     @GetMapping("/pending")
     public String findPendingTasks(Model model){
-        model.addAttribute("tasks", taskService.getAllByStatus(Status.PENDING).stream().map(Task::toDTO).collect(Collectors.toSet()));
+        model.addAttribute("set", taskService.getAllByStatus(Status.PENDING).stream().map(Task::toDTO).collect(Collectors.toSet()));
         return "/task/pending";
     }
 
     @GetMapping("/done")
     public String findDoneTasks(Model model){
-        model.addAttribute("tasks", taskService.getAllByStatus(Status.DONE).stream().map(Task::toDTO).collect(Collectors.toSet()));
-        return "/task/pending";
+        model.addAttribute("set", taskService.getAllByStatus(Status.DONE).stream().map(Task::toDTO).collect(Collectors.toSet()));
+        return "/task/done";
     }
 
     @GetMapping("/deleteAllFinished")
     public String deleteAllCompleted(){
         taskService.deleteAllWhereComplete();
-        return "redirect:/task";
+        return "task/all";
     }
     
 }
