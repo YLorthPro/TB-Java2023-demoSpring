@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="~{ /fragment/fragments :: css }"></th:block>
+</head>
+<body>
+
+<th:block th:replace="~{ /fragment/fragments :: header }"></th:block>
+
+<div class="content">
+    <div class="error-message">404 Error - Page Not Found</div>
+    <div th:if="${exception}"><p th:text="${exception.message}"></p></div>
+    <div class="error-description">
+        <img src="/assets/MicrosoftTeams-image.png" width="800px">
+    </div>
+
+    <a href="/" class="cta-btn">Go to Homepage</a>
+</div>
+
+</body>
+</html>
