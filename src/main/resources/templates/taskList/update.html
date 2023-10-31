@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update</title>
+    <th:block th:replace="~{ /fragment/fragments :: css }"></th:block>
+</head>
+<body>
+
+<th:block th:replace="~{ /fragment/fragments :: header }"></th:block>
+    <h1>Update Task List</h1>
+    <form th:object="${form}" th:action="@{/taskList/update/{id} (id=${id})}" method="post">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" th:field="*{name}" required="required" />
+        </div>
+        <div>
+            <label for="owner">Owner:</label>
+            <input type="text" id="owner" name="owner" th:field="*{owner}" required="required" />
+        </div>
+        <button type="submit">Update Task List</button>
+    </form>
+
+<th:block th:replace="~{ /fragment/fragments :: footer }"></th:block>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Task List Details</title>
+    <th:block th:replace="~{ /fragment/fragments :: css }"></th:block>
+</head>
+<body>
+
+<th:block th:replace="~{ /fragment/fragments :: header }"></th:block>
+<h1>List Details</h1>
+<p>Name: <span th:text="${liste.name}"></span></p>
+<p>Creation Date: <span th:text="${liste.creation}"></span></p>
+<p>Last Updated: <span th:text="${liste.lastUpdated}"></span></p>
+
+<h2>Tasks</h2>
+<ul>
+    <li th:each="task : ${liste.taskEntities}">
+        <p>Date: <span th:text="${task.date}"></span></p>
+        <p>Name: <span th:text="${task.name}"></span></p>
+        <p>Description: <span th:text="${task.description}"></span></p>
+        <p>Status: <span th:text="${task.status}"></span></p>
+    </li>
+</ul>
+
+<h2>Owner</h2>
+<p>Owner: <span th:text="${liste.owner().login()}"></span></p>
+
+<th:block th:replace="~{ /fragment/fragments :: footer }"></th:block>
+</body>
+</html>

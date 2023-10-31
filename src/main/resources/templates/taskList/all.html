@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" name="viewport">
+    <title>acceuil</title>
+    <th:block th:replace="~{ /fragment/fragments :: css }"></th:block>
+</head>
+<body>
+
+<th:block th:replace="~{ /fragment/fragments :: header }"></th:block>
+
+    <h1>To-do List</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Date de création</th>
+                <th>Date de dernière modification</th>
+                <th>Nombre de taches</th>
+                <th>Actions</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="liste : ${liste}" >
+                <td th:text="${liste.name}"/>
+                <td th:text="${liste.creation}"/>
+                <td th:text="${liste.lastUpdated}"/>
+                <td th:text="${liste.taskEntities.size()}"/>
+                <td><button><a th:href="@{/taskList/{id} (id = ${liste.id})}">Details</a></button></td>
+                <td><button><a th:href="@{/taskList/update/{id} (id = ${liste.id})}">Update</a></button></td>
+                <td><button><a th:href="@{/taskList/delete/{id} (id = ${liste.id})}">Delete</a></button></td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <th:block th:replace="~{ /fragment/fragments :: footer }"></th:block>
+</body>
+</html>

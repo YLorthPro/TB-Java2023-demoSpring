@@ -28,12 +28,14 @@
                 <td th:text="${task.date()}"/>
                 <td th:text="${task.status()}"/>
                 <td><button><a th:href="@{/task/{id} (id = ${task.id()})}">Terminée</a></button></td>
+                <td><button><a th:href="@{/task/update/{id} (id = ${task.id()})}">Modifier</a></button></td>
+                <td><button><a th:href="@{/task/delete/{id} (id = ${task.id})}">Delete</a></button></td>
 
             </tr>
         </tbody>
     </table>
+    <br>
     <a href="/task/deleteAllFinished">Supprimer les tâches terminées</a>
-    <a href="/task/create">Ajouter une tâche</a>
 
     <th:block th:replace="~{ /fragment/fragments :: footer }"></th:block>
 </body>

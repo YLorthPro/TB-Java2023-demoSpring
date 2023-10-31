@@ -36,6 +36,15 @@
                         th:text="${status}"></option>
             </select>
         </div>
+
+        <div>
+            <label for="in-status">Categorie :</label>
+            <select th:field="${task.taskListId}" id="in-category">
+                <option th:each="list : ${taskList}"
+                        th:value="${list.id}"
+                        th:text="${list.name}"></option>
+            </select>
+        </div>
         
         <button type="submit">Ajouter</button>
     </form>

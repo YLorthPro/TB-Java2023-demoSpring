@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier tâche</title>
+    <th:block th:replace="~{ /fragment/fragments :: css }"></th:block>
+</head>
+<body>
+
+<th:block th:replace="~{ /fragment/fragments :: header }"></th:block>
+<h1>Modification d'une Tache</h1>
+<form th:action="@{/task/update/{id} (id=${id})}" method="post">
+
+    <div>
+        <label for="in-name">Titre :</label>
+        <input type="text" th:field="${task.name}" id="in-name"/>
+    </div>
+
+    <div>
+        <label for="in-description">Description :</label>
+        <input type="text" th:field="${task.description}" id="in-description"/>
+        <span th:if="${#fields.hasErrors('task.description')}" th:errors="${task.description}" style="color: red"></span>
+    </div>
+
+    <div>
+        <label for="in-date">Date :</label>
+        <input type="date" th:field="${task.date}" id="in-date"/>
+        <span th:if="${#fields.hasErrors('task.date')}" th:errors="${task.date}" style="color: red"></span>
+    </div>
+
+    <div>
+        <label for="in-status">Status :</label>
+        <select th:field="${task.status}" id="in-status">
+            <option th:each="status : ${T(be.bstorm.formation.models.entities.Status).values()}"
+                    th:value="${status}"
+                    th:text="${status}"></option>
+        </select>
+    </div>
+    
+    <button type="submit">Modifier</button>
+</form>
+
+<th:block th:replace="~{ /fragment/fragments :: footer }"></th:block>
+</body>
+</html>
