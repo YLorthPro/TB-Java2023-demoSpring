@@ -1,6 +1,7 @@
 package be.bstorm.formation.dal.models.entities;
 
 
+import be.bstorm.formation.dal.models.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.Data;
 

@@ -18,6 +18,12 @@
             <label for="owner">Owner:</label>
             <input type="text" id="owner" name="owner" th:field="*{owner}" required="required" />
         </div>
+        <div>
+            <label for="viewersEntitiesLogin">Viewers:</label>
+            <select id="viewersEntitiesLogin" name="viewersEntitiesLogin" multiple="multiple" th:field="*{viewersEntitiesLogin}">
+                <option th:each="user : ${users}" th:value="${user.login}" th:text="${user.login}"></option>
+            </select>
+        </div>
         <button type="submit">Create Task List</button>
     </form>
 

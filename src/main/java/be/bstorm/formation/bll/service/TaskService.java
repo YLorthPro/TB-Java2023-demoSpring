@@ -1,6 +1,6 @@
 package be.bstorm.formation.bll.service;
 
-import be.bstorm.formation.dal.models.entities.Status;
+import be.bstorm.formation.dal.models.enums.TaskStatus;
 import be.bstorm.formation.dal.models.entities.TaskEntity;
 import be.bstorm.formation.pl.mvc.models.forms.TaskForm;
 
@@ -19,7 +19,7 @@ public interface TaskService {
     void complete(Long id);
 
     // All par status
-    Set<TaskEntity> getAllByStatus(String login, Status status);
+    Set<TaskEntity> getAllByStatus(String login, TaskStatus status);
     
     // Delete complete
     void deleteAllWhereComplete();

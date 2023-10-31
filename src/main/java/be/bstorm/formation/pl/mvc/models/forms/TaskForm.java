@@ -1,6 +1,6 @@
 package be.bstorm.formation.pl.mvc.models.forms;
 
-import be.bstorm.formation.dal.models.entities.Status;
+import be.bstorm.formation.dal.models.enums.TaskStatus;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -19,6 +19,7 @@ public class TaskForm{
     @NotBlank
     @Size(min = 4)
     private String description;
-    private Status status;
+    private TaskStatus status;
+    @NotNull
     private Long taskListId;
 }

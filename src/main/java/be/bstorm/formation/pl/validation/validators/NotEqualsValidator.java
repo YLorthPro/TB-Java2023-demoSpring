@@ -1,7 +1,7 @@
-package be.bstorm.formation.pl.mvc.validation.validators;
+package be.bstorm.formation.pl.validation.validators;
 
 
-import be.bstorm.formation.pl.mvc.validation.constraints.NotEquals;
+import be.bstorm.formation.pl.validation.constraints.NotEquals;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 

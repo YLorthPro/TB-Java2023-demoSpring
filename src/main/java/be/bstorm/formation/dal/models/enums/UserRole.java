@@ -1,4 +1,4 @@
-package be.bstorm.formation.dal.models.entities;
+package be.bstorm.formation.dal.models.enums;
 
 public enum UserRole {
     ADMIN,

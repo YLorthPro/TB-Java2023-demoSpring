@@ -1,7 +1,6 @@
-package be.bstorm.formation.pl.mvc.validation.constraints;
+package be.bstorm.formation.pl.validation.constraints;
 
-
-import be.bstorm.formation.pl.mvc.validation.validators.NotEqualsValidator;
+import be.bstorm.formation.pl.validation.validators.ConfirmPasswordValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -10,17 +9,14 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target(ElementType.FIELD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = NotEqualsValidator.class)
-public @interface NotEquals {
+@Constraint(validatedBy = ConfirmPasswordValidator.class)
+public @interface ConfirmPassword {
 
-    String value() default "coucou";
-
-    String message() default "value can't be equal to a secret word";
+    String message() default "mot de passe et confirmation pas pareil coco";
 
     Class<?>[] groups() default { };
 
     Class<? extends Payload>[] payload() default { };
-
 }

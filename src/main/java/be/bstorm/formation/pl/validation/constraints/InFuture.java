@@ -1,6 +1,6 @@
-package be.bstorm.formation.pl.mvc.validation.constraints;
+package be.bstorm.formation.pl.validation.constraints;
 
-import be.bstorm.formation.pl.mvc.validation.validators.InFutureValidator;
+import be.bstorm.formation.pl.validation.validators.InFutureValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 

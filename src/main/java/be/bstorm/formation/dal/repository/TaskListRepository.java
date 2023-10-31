@@ -9,5 +9,6 @@ import java.util.Set;
 public interface TaskListRepository extends JpaRepository<TaskListEntity, Long> {
     Set<TaskListEntity> findAllByOwnerEntity(UserEntity owner);
     
+    //TODO custom query
     Set<TaskListEntity> findAllByViewersEntities(UserEntity viewer);
 }

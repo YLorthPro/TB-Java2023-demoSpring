@@ -18,6 +18,19 @@
             <label for="owner">Owner:</label>
             <input type="text" id="owner" name="owner" th:field="*{owner}" required="required" />
         </div>
+        <div>
+            <label>Viewers:</label>
+            <div th:each="user : ${users}">
+                <label>
+                    <input type="checkbox" th:field="*{viewersEntitiesLogin}" th:value="${user.login}"
+                           th:checked="${viewersEntitiesLogin != null and viewersEntitiesLogin.contains(user.login)}" />
+                    <span th:text="${user.login}"></span>
+                </label>
+            </div>
+        </div>
+
+
+
         <button type="submit">Update Task List</button>
     </form>
 

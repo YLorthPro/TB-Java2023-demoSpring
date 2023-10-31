@@ -2,10 +2,13 @@ package be.bstorm.formation.bll.service.impl;
 
 import be.bstorm.formation.bll.service.UserService;
 import be.bstorm.formation.dal.models.entities.UserEntity;
-import be.bstorm.formation.dal.models.entities.UserRole;
+import be.bstorm.formation.dal.models.enums.UserRole;
 import be.bstorm.formation.pl.mvc.models.forms.RegisterForm;
 import be.bstorm.formation.dal.repository.UserRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,7 +23,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void register(RegisterForm form) {
         if (form == null)
-            throw new RuntimeException("form can't be null");
+            throw new IllegalArgumentException("form can't be null");
 
         UserEntity entity = new UserEntity();
         entity.setFirstName(form.getFirstName());
@@ -31,5 +34,10 @@ public class UserServiceImpl implements UserService {
         entity.setRole(UserRole.VISITOR);
         
         userRepository.save(entity);
+    }
+
+    @Override
+    public Set<UserEntity> getAll() {
+        return new HashSet<>(userRepository.findAll());
     }
 }

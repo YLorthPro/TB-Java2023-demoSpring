@@ -2,7 +2,8 @@ package be.bstorm.formation.dal.utils;
 
 
 import be.bstorm.formation.dal.models.entities.*;
-import be.bstorm.formation.models.entities.*;
+import be.bstorm.formation.dal.models.enums.TaskStatus;
+import be.bstorm.formation.dal.models.enums.UserRole;
 import be.bstorm.formation.dal.repository.TaskListRepository;
 import be.bstorm.formation.dal.repository.TaskRepository;
 import be.bstorm.formation.dal.repository.UserRepository;
@@ -50,7 +51,7 @@ public class DataInit implements InitializingBean {
         tache.setName("test");
         tache.setDescription("retest");
         tache.setDate(LocalDate.now());
-        tache.setStatus(Status.PENDING);
+        tache.setStatus(TaskStatus.PENDING);
         tache.setTaskListEntity(listEntity);
         taskRepository.save(tache);
 

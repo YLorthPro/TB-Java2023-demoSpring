@@ -1,6 +1,6 @@
 package be.bstorm.formation.pl.mvc.models.dto;
 
-import be.bstorm.formation.dal.models.entities.Status;
+import be.bstorm.formation.dal.models.enums.TaskStatus;
 import be.bstorm.formation.dal.models.entities.TaskEntity;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -12,7 +12,7 @@ public record Task (
     LocalDate date,
     String name,
     String description,
-    Status status,
+    TaskStatus status,
     Long taskListId
     ){
     
