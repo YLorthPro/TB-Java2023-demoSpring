@@ -1,4 +1,4 @@
-package be.bstorm.formation.pl.mvc.models.forms;
+package be.bstorm.formation.pl.models.forms;
 
 import be.bstorm.formation.pl.validation.constraints.ConfirmPassword;
 import jakarta.validation.constraints.NotBlank;

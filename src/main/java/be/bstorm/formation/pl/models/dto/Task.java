@@ -1,4 +1,4 @@
-package be.bstorm.formation.pl.mvc.models.dto;
+package be.bstorm.formation.pl.models.dto;
 
 import be.bstorm.formation.dal.models.enums.TaskStatus;
 import be.bstorm.formation.dal.models.entities.TaskEntity;

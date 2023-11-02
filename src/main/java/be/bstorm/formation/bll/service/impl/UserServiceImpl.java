@@ -3,7 +3,7 @@ package be.bstorm.formation.bll.service.impl;
 import be.bstorm.formation.bll.service.UserService;
 import be.bstorm.formation.dal.models.entities.UserEntity;
 import be.bstorm.formation.dal.models.enums.UserRole;
-import be.bstorm.formation.pl.mvc.models.forms.RegisterForm;
+import be.bstorm.formation.pl.models.forms.RegisterForm;
 import be.bstorm.formation.dal.repository.UserRepository;
 import org.springframework.stereotype.Service;
 

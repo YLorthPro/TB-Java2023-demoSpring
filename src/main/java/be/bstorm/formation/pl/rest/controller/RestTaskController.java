@@ -2,11 +2,10 @@ package be.bstorm.formation.pl.rest.controller;
 
 import be.bstorm.formation.bll.service.TaskService;
 import be.bstorm.formation.dal.models.enums.TaskStatus;
-import be.bstorm.formation.pl.mvc.models.dto.Task;
-import be.bstorm.formation.pl.mvc.models.forms.TaskForm;
+import be.bstorm.formation.pl.models.dto.Task;
+import be.bstorm.formation.pl.models.forms.TaskForm;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -24,9 +23,9 @@ public class RestTaskController {
     //CRUD
     
     //Read
-    @GetMapping("/all")
-    public ResponseEntity<Set<Task>> getAll(){
-        return ResponseEntity.ok(taskService.getAll("yann").stream().map(Task::toDTO).collect(Collectors.toSet()));
+    @GetMapping("/all/{login}")
+    public ResponseEntity<Set<Task>> getAll(@PathVariable String login){
+        return ResponseEntity.ok(taskService.getAll(login).stream().map(Task::toDTO).collect(Collectors.toSet()));
     }
     
     @GetMapping("/{id:[0-9]+}")
@@ -54,6 +53,8 @@ public class RestTaskController {
     public void delete(@PathVariable Long id){
         taskService.delete(id);
     }
+    
+    //Other
 
     @GetMapping("/pending/{login}")
     public ResponseEntity<Set<Task>> findPendingTasks(@PathVariable String login){
@@ -63,6 +64,15 @@ public class RestTaskController {
     @GetMapping("/done/{login}")
     public ResponseEntity<Set<Task>> findDoneTasks(@PathVariable String login){
         return ResponseEntity.ok(taskService.getAllByStatus(login, TaskStatus.DONE).stream().map(Task::toDTO).collect(Collectors.toSet()));
+    }
 
+    @DeleteMapping("/deleteAllFinished")
+    public void deleteAllCompleted(){
+        taskService.deleteAllWhereComplete();
+    }
+
+    @PatchMapping("/{id:[0-9]+}")
+    public void finished(@PathVariable Long id){
+        taskService.complete(id);
     }
 }

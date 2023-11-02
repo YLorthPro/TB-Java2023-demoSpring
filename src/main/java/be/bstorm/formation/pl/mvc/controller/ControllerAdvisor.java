@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
  * Les méthodes de cette classe sont annotées avec des annotations spécifiques pour indiquer comment elles doivent
  * réagir aux exceptions ou ajouter des fonctionnalités globales.
  */
-@ControllerAdvice
 public class ControllerAdvisor {
 
     /**
@@ -28,7 +27,6 @@ public class ControllerAdvisor {
      * @param model Le modèle (Model) utilisé pour transmettre des données à la vue.
      * @return Le nom de la vue à afficher pour l'erreur 404 ("error/404").
      */
-    @ExceptionHandler(NotFoundException.class)
     public String handleObjectNotFound(NotFoundException ex, Model model){
         model.addAttribute("exception", ex);
         return "error/404";

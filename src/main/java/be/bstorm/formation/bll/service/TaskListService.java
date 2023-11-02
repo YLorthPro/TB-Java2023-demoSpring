@@ -1,7 +1,7 @@
 package be.bstorm.formation.bll.service;
 
 import be.bstorm.formation.dal.models.entities.TaskListEntity;
-import be.bstorm.formation.pl.mvc.models.forms.TaskListForm;
+import be.bstorm.formation.pl.models.forms.TaskListForm;
 
 import java.util.Optional;
 import java.util.Set;

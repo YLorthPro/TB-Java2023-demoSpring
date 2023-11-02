@@ -5,12 +5,11 @@ import be.bstorm.formation.dal.models.enums.TaskStatus;
 import be.bstorm.formation.dal.models.entities.TaskEntity;
 import be.bstorm.formation.dal.models.entities.UserEntity;
 import be.bstorm.formation.bll.models.exception.NotFoundException;
-import be.bstorm.formation.pl.mvc.models.forms.TaskForm;
+import be.bstorm.formation.pl.models.forms.TaskForm;
 import be.bstorm.formation.dal.repository.TaskListRepository;
 import be.bstorm.formation.dal.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;

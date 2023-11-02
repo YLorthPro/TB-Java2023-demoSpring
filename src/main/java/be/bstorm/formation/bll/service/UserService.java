@@ -1,7 +1,7 @@
 package be.bstorm.formation.bll.service;
 
 import be.bstorm.formation.dal.models.entities.UserEntity;
-import be.bstorm.formation.pl.mvc.models.forms.RegisterForm;
+import be.bstorm.formation.pl.models.forms.RegisterForm;
 
 import java.util.Set;
 

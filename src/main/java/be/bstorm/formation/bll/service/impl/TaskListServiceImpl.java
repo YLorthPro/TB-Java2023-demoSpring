@@ -4,14 +4,12 @@ import be.bstorm.formation.bll.service.TaskListService;
 import be.bstorm.formation.dal.models.entities.TaskListEntity;
 import be.bstorm.formation.dal.models.entities.UserEntity;
 import be.bstorm.formation.bll.models.exception.NotFoundException;
-import be.bstorm.formation.pl.mvc.models.forms.TaskListForm;
+import be.bstorm.formation.pl.models.forms.TaskListForm;
 import be.bstorm.formation.dal.repository.TaskListRepository;
 import be.bstorm.formation.dal.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -53,8 +51,8 @@ public class TaskListServiceImpl implements TaskListService {
         UserEntity user = userRepository.findByLogin(login).orElseThrow(()->new NotFoundException("Pas trouvé"));
         
         Set<TaskListEntity> all = taskListRepository.findAllByOwnerEntity(user);
-        all.addAll(taskListRepository.findAllByViewersEntities(user));
-        return all;
+        all.addAll(taskListRepository.findAllByViewerEntity(user));
+        return taskListRepository.findAllByUserEntity(user);
     }
 
     /**

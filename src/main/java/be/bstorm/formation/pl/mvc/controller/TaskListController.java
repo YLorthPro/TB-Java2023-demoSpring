@@ -1,12 +1,11 @@
 package be.bstorm.formation.pl.mvc.controller;
 
 import be.bstorm.formation.bll.service.UserService;
-import be.bstorm.formation.pl.mvc.models.dto.TaskList;
+import be.bstorm.formation.pl.models.dto.TaskList;
 import be.bstorm.formation.bll.models.exception.NotFoundException;
-import be.bstorm.formation.pl.mvc.models.dto.User;
-import be.bstorm.formation.pl.mvc.models.forms.TaskListForm;
+import be.bstorm.formation.pl.models.dto.User;
+import be.bstorm.formation.pl.models.forms.TaskListForm;
 import be.bstorm.formation.bll.service.TaskListService;
-import jakarta.persistence.Id;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,7 +1,7 @@
 package be.bstorm.formation.pl.mvc.controller;
 
-import be.bstorm.formation.pl.mvc.models.dto.Task;
-import be.bstorm.formation.pl.mvc.models.forms.TaskForm;
+import be.bstorm.formation.pl.models.dto.Task;
+import be.bstorm.formation.pl.models.forms.TaskForm;
 import be.bstorm.formation.dal.models.enums.TaskStatus;
 import be.bstorm.formation.bll.models.exception.NotFoundException;
 import be.bstorm.formation.bll.service.TaskListService;

@@ -1,6 +1,6 @@
 package be.bstorm.formation.pl.mvc.controller;
 
-import be.bstorm.formation.pl.mvc.models.forms.RegisterForm;
+import be.bstorm.formation.pl.models.forms.RegisterForm;
 import be.bstorm.formation.bll.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;

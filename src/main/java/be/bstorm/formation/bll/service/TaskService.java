@@ -2,7 +2,7 @@ package be.bstorm.formation.bll.service;
 
 import be.bstorm.formation.dal.models.enums.TaskStatus;
 import be.bstorm.formation.dal.models.entities.TaskEntity;
-import be.bstorm.formation.pl.mvc.models.forms.TaskForm;
+import be.bstorm.formation.pl.models.forms.TaskForm;
 
 import java.util.Optional;
 import java.util.Set;
