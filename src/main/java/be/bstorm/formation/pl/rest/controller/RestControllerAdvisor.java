@@ -1,7 +1,7 @@
 package be.bstorm.formation.pl.rest.controller;
 
 import be.bstorm.formation.bll.models.exception.NotFoundException;
-import be.bstorm.formation.pl.models.Error;
+import be.bstorm.formation.pl.models.dto.Error;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,7 @@ public class RestControllerAdvisor {
                 .URI(req.getRequestURI())
                 .build();
         
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(error);
     }
 }

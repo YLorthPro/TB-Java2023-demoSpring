@@ -1,4 +1,4 @@
-package be.bstorm.formation.pl.models;
+package be.bstorm.formation.pl.models.dto;
 
 import lombok.Builder;
 import lombok.Data;
