@@ -1,11 +1,10 @@
 package be.bstorm.formation.bll.service;
 
-import be.bstorm.formation.dal.models.entities.UserEntity;
+import be.bstorm.formation.pl.models.dto.Auth;
+import be.bstorm.formation.pl.models.forms.LoginForm;
 import be.bstorm.formation.pl.models.forms.RegisterForm;
 
-import java.util.Set;
-
 public interface UserService {
+    Auth login(LoginForm form);
     void register(RegisterForm form);
-    Set<UserEntity> getAll();
 }

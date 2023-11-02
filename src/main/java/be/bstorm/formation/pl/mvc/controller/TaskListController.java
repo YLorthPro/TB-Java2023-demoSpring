@@ -3,7 +3,6 @@ package be.bstorm.formation.pl.mvc.controller;
 import be.bstorm.formation.bll.service.UserService;
 import be.bstorm.formation.pl.models.dto.TaskList;
 import be.bstorm.formation.bll.models.exception.NotFoundException;
-import be.bstorm.formation.pl.models.dto.User;
 import be.bstorm.formation.pl.models.forms.TaskListForm;
 import be.bstorm.formation.bll.service.TaskListService;
 import jakarta.validation.Valid;
@@ -11,8 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/taskList")
@@ -75,7 +72,7 @@ public class TaskListController {
     public String create(Model model, @PathVariable String login){
         TaskListForm form = new TaskListForm();
         form.setOwner(login);
-        model.addAttribute("users", userService.getAll().stream().map(User::toDTO).collect(Collectors.toSet()));
+        //model.addAttribute("users", userService.getAll().stream().map(User::toDTO).collect(Collectors.toSet()));
         model.addAttribute("form", form);
         return "/taskList/create";
     }
@@ -121,7 +118,7 @@ public class TaskListController {
     @GetMapping("/update/{id:[0-9]+}")
     public String update(Model model, @PathVariable Long id){
         model.addAttribute("id",id);
-        model.addAttribute("users", userService.getAll().stream().map(User::toDTO).collect(Collectors.toSet()));
+       //model.addAttribute("users", userService.getAll().stream().map(User::toDTO).collect(Collectors.toSet()));
         model.addAttribute("form", TaskList.toDTO(taskListService.getOne(id).orElseThrow(()->new NotFoundException("blabla"))));
         return "/taskList/update";
     }

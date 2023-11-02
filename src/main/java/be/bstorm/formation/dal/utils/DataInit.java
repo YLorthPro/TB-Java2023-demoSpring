@@ -8,10 +8,13 @@ import be.bstorm.formation.dal.repository.TaskListRepository;
 import be.bstorm.formation.dal.repository.TaskRepository;
 import be.bstorm.formation.dal.repository.UserRepository;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 @Component
 public class DataInit implements InitializingBean {
@@ -19,12 +22,14 @@ public class DataInit implements InitializingBean {
     private final TaskRepository taskRepository;
     private final TaskListRepository taskListRepository;
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
     
 
-    public DataInit(TaskRepository taskRepository, TaskListRepository taskListRepository, UserRepository userRepository) {
+    public DataInit(TaskRepository taskRepository, TaskListRepository taskListRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.taskRepository = taskRepository;
         this.taskListRepository = taskListRepository;
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -33,21 +38,27 @@ public class DataInit implements InitializingBean {
 
         UserEntity moi = new UserEntity();
         moi.setBirthdate(LocalDate.of(1991,03,13));
-        moi.setRole(UserRole.ADMIN);
+        Set<UserRole> set = new HashSet<>();
+        set.add(UserRole.ADMIN);
+        moi.setRoles(set);
         moi.setLogin("yann");
-        moi.setPassword("Test1234=");
+        moi.setPassword(passwordEncoder.encode("Test1234="));
         moi.setFirstName("Yann");
         moi.setLastName("Lorthioir");
+        moi.setEnabled(true);
 
         userRepository.save(moi);
 
         UserEntity pasMoi = new UserEntity();
         pasMoi.setBirthdate(LocalDate.of(1991,03,14));
-        pasMoi.setRole(UserRole.VISITOR);
+        Set<UserRole> set2 = new HashSet<>();
+        set.add(UserRole.VISITOR);
+        pasMoi.setRoles(set2);
         pasMoi.setLogin("pas yann");
-        pasMoi.setPassword("Test1234=");
+        pasMoi.setPassword(passwordEncoder.encode("Test1234="));
         pasMoi.setFirstName("pas Yann");
         pasMoi.setLastName("pas Lorthioir");
+        pasMoi.setEnabled(true);
 
         userRepository.save(pasMoi);
 

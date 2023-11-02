@@ -6,6 +6,7 @@ import be.bstorm.formation.pl.models.dto.TaskList;
 import be.bstorm.formation.pl.models.forms.TaskListForm;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -26,6 +27,7 @@ public class RestTaskListController {
         return ResponseEntity.ok(taskListService.getAll(login).stream().map(TaskList::toDTO).collect(Collectors.toSet()));
     }
     
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id:[0-9]+}")
     public ResponseEntity<TaskList> getOne(@PathVariable Long id){
         return ResponseEntity.ok(TaskList.toDTO(taskListService.getOne(id).orElseThrow(()->new NotFoundException("Pas trouvé"))));
