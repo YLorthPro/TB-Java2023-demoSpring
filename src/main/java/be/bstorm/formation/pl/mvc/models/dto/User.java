@@ -2,6 +2,7 @@ package be.bstorm.formation.pl.mvc.models.dto;
 
 import be.bstorm.formation.dal.models.entities.UserEntity;
 
+
 public record User (
         String login
 ){
