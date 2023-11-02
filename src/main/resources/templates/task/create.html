@@ -31,7 +31,7 @@
         <div>
             <label for="in-status">Status :</label>
             <select th:field="${task.status}" id="in-status">
-                <option th:each="status : ${T(be.bstorm.formation.models.entities.Status).values()}"
+                <option th:each="status : ${T(be.bstorm.formation.dal.models.enums.TaskStatus).values()}"
                         th:value="${status}"
                         th:text="${status}"></option>
             </select>

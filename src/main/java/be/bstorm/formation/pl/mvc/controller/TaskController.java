@@ -84,6 +84,7 @@ public class TaskController {
     @GetMapping("/update/{id:[0-9]+}")
     public String update(Model model, @PathVariable Long id){
         model.addAttribute("id", id);
+        model.addAttribute("taskList", taskListService.getAllAsOwner("yann"));
         model.addAttribute("task", Task.toDTO(taskService.getOne(id).orElseThrow(()->new NotFoundException("ah que non"))));
         return "/task/update";
     }
