@@ -10,13 +10,10 @@ import org.springframework.data.repository.query.Param;
 import java.util.Set;
 
 public interface TaskListRepository extends JpaRepository<TaskListEntity, Long> {
-    Set<TaskListEntity> findAllByOwnerEntity(UserEntity owner);
-
-    @Query("SELECT t FROM TaskListEntity t JOIN t.viewersEntities v WHERE :viewerEntity MEMBER OF t.viewersEntities")
-    Set<TaskListEntity> findAllByViewerEntity(@Param("viewerEntity") UserEntity viewer);
-
-    @Query("SELECT DISTINCT t FROM TaskListEntity t " +
-            "LEFT JOIN t.viewersEntities v " +
-            "WHERE t.ownerEntity = :userEntity OR :userEntity MEMBER OF t.viewersEntities")
-    Set<TaskListEntity> findAllByUserEntity(@Param("userEntity") UserEntity viewer);
+    //Set<TaskListEntity> findAllByOwnerEntity(UserEntity owner);
+    
+    //Set<TaskListEntity> findAllByViewersEntities(UserEntity viewer);
+    
+    @Query("SELECT t FROM TaskListEntity t LEFT JOIN t.viewersEntities v WHERE t.ownerEntity = :userEntity OR :userEntity MEMBER OF t.viewersEntities")
+    Set<TaskListEntity> findAllByUserEntity(@Param("userEntity")UserEntity user);
 }

@@ -50,8 +50,6 @@ public class TaskListServiceImpl implements TaskListService {
     public Set<TaskListEntity> getAll(String login) {
         UserEntity user = userRepository.findByLogin(login).orElseThrow(()->new NotFoundException("Pas trouvé"));
         
-        Set<TaskListEntity> all = taskListRepository.findAllByOwnerEntity(user);
-        all.addAll(taskListRepository.findAllByViewerEntity(user));
         return taskListRepository.findAllByUserEntity(user);
     }
 
@@ -72,7 +70,7 @@ public class TaskListServiceImpl implements TaskListService {
     public Set<TaskListEntity> getAllAsOwner(String login) {
         UserEntity user = userRepository.findByLogin(login).orElseThrow(()->new NotFoundException("Pas trouvé"));
         
-        return taskListRepository.findAllByOwnerEntity(user);
+        return taskListRepository.findAllByUserEntity(user);
     }
 
     /**
