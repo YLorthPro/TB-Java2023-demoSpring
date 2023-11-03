@@ -4,9 +4,10 @@ import be.bstorm.formation.bll.service.TaskListService;
 import be.bstorm.formation.dal.models.entities.TaskListEntity;
 import be.bstorm.formation.dal.models.entities.UserEntity;
 import be.bstorm.formation.bll.models.exception.NotFoundException;
-import be.bstorm.formation.pl.models.forms.TaskListForm;
 import be.bstorm.formation.dal.repository.TaskListRepository;
 import be.bstorm.formation.dal.repository.UserRepository;
+import be.bstorm.formation.pl.models.forms.MVCTaskListForm;
+import be.bstorm.formation.pl.models.forms.RestTaskListForm;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -103,7 +104,7 @@ public class TaskListServiceImpl implements TaskListService {
      *                          l'utilisateur n'a pas été trouvé.
      */
     @Override
-    public void create(TaskListForm form) {
+    public void create(RestTaskListForm form, String login) {
         if(form == null)
             throw new IllegalArgumentException("Form can't be null");
 
@@ -111,7 +112,10 @@ public class TaskListServiceImpl implements TaskListService {
         entity.setName(form.getName());
         entity.setCreation(LocalDate.now());
         entity.setLastUpdated(LocalDate.now());
-        entity.setOwnerEntity(userRepository.findByLogin(form.getOwner()).orElseThrow(() -> new NotFoundException("Pas trouvé non plus")));
+        if(form instanceof MVCTaskListForm)
+            entity.setOwnerEntity(userRepository.findByLogin(((MVCTaskListForm) form).getOwner()).orElseThrow(() -> new NotFoundException("Pas trouvé non plus")));
+        else
+            entity.setOwnerEntity(userRepository.findByLogin(login).orElseThrow(() -> new NotFoundException("Pas trouvé non plus")));
         entity.setViewersEntities(form.getViewersEntitiesLogin().stream().map(ve-> userRepository.findByLogin(ve).get()).toList());
         
         taskListRepository.save(entity);
@@ -132,7 +136,7 @@ public class TaskListServiceImpl implements TaskListService {
      *                          trouvée, une exception NotFoundException est levée.
      */
     @Override
-    public void update(Long id, TaskListForm form) {
+    public void update(Long id, RestTaskListForm form) {
         if(form == null)
             throw new IllegalArgumentException("Form can't be null");
 

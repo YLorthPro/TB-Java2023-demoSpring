@@ -3,7 +3,7 @@ package be.bstorm.formation.pl.mvc.controller;
 import be.bstorm.formation.bll.service.UserService;
 import be.bstorm.formation.pl.models.dto.TaskList;
 import be.bstorm.formation.bll.models.exception.NotFoundException;
-import be.bstorm.formation.pl.models.forms.TaskListForm;
+import be.bstorm.formation.pl.models.forms.MVCTaskListForm;
 import be.bstorm.formation.bll.service.TaskListService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -70,7 +70,7 @@ public class TaskListController {
      */
     @GetMapping("/create/{login}")
     public String create(Model model, @PathVariable String login){
-        TaskListForm form = new TaskListForm();
+        MVCTaskListForm form = new MVCTaskListForm();
         form.setOwner(login);
         //model.addAttribute("users", userService.getAll().stream().map(User::toDTO).collect(Collectors.toSet()));
         model.addAttribute("form", form);
@@ -91,13 +91,13 @@ public class TaskListController {
      *         d'erreurs de validation, ou une redirection vers la liste de toutes les listes de tâches en cas de succès).
      */
     @PostMapping("/create")
-    public String processCreate(@ModelAttribute @Valid TaskListForm form, BindingResult bindingResult){
+    public String processCreate(@ModelAttribute @Valid MVCTaskListForm form, BindingResult bindingResult){
 
         if(bindingResult.hasErrors() ) {
             return "taskList/create";
         }
 
-        taskListService.create(form);
+        taskListService.create(form,null);
         return "redirect:/taskList/all/"+form.getOwner();
     }
 
@@ -137,7 +137,7 @@ public class TaskListController {
      *         d'erreurs de validation, ou une redirection vers la liste de toutes les listes de tâches de l'utilisateur en cas de succès).
      */
     @PostMapping("/update/{id:[0-9]+}")
-    public String processUpdate(@ModelAttribute @Valid TaskListForm form, BindingResult bindingResult, @PathVariable Long id){
+    public String processUpdate(@ModelAttribute @Valid MVCTaskListForm form, BindingResult bindingResult, @PathVariable Long id){
 
         if(bindingResult.hasErrors() ) {
             return "taskList/update";

@@ -6,6 +6,7 @@ import be.bstorm.formation.pl.models.forms.LoginForm;
 import be.bstorm.formation.pl.models.forms.RegisterForm;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +21,13 @@ public class RestUserController {
         this.userService = userService;
     }
 
+    @PreAuthorize("isAnonymous()")
     @PostMapping("/login")
     public ResponseEntity<Auth> login(@RequestBody @Valid LoginForm form){
         return ResponseEntity.ok(userService.login(form));
     }
+
+    @PreAuthorize("isAnonymous()")
     @PostMapping("/register")
     public void create(@RequestBody @Valid RegisterForm form){
         userService.register(form);

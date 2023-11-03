@@ -2,6 +2,7 @@ package be.bstorm.formation.pl.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -28,7 +29,9 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> {
-                    request.anyRequest().permitAll();
+                    request
+                            .anyRequest().permitAll()
+                            .requestMatchers( r -> r.getRequestURI().length() > 500 ).denyAll();
                 });
         
 

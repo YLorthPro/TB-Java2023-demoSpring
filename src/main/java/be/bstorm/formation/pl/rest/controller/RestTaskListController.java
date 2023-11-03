@@ -3,10 +3,11 @@ package be.bstorm.formation.pl.rest.controller;
 import be.bstorm.formation.bll.models.exception.NotFoundException;
 import be.bstorm.formation.bll.service.TaskListService;
 import be.bstorm.formation.pl.models.dto.TaskList;
-import be.bstorm.formation.pl.models.forms.TaskListForm;
+import be.bstorm.formation.pl.models.forms.RestTaskListForm;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -22,29 +23,41 @@ public class RestTaskListController {
         this.taskListService = taskListService;
     }
 
-    @GetMapping("/all/{login}")
-    public ResponseEntity<Set<TaskList>> getAll(@PathVariable String login){
-        return ResponseEntity.ok(taskListService.getAll(login).stream().map(TaskList::toDTO).collect(Collectors.toSet()));
+    @GetMapping("/all")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<Set<TaskList>> getAll(Authentication authentication){
+        return ResponseEntity.ok(taskListService.getAll(authentication.getName()).stream().map(TaskList::toDTO).collect(Collectors.toSet()));
     }
     
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id:[0-9]+}")
-    public ResponseEntity<TaskList> getOne(@PathVariable Long id){
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<TaskList> getOne(@PathVariable Long id, Authentication authentication){
+        Set<TaskList> taskListSet = taskListService.getAll(authentication.getName()).stream().map(TaskList::toDTO).collect(Collectors.toSet());
+        if (taskListSet.stream().noneMatch(taskList -> taskList.getId()==id)) {
+            throw new RuntimeException("Not authorized");
+        }
         return ResponseEntity.ok(TaskList.toDTO(taskListService.getOne(id).orElseThrow(()->new NotFoundException("Pas trouvé"))));
     }
     
     @PostMapping("/create")
-    public void create(@RequestBody @Valid TaskListForm form){
-        taskListService.create(form);
+    @PreAuthorize("isAuthenticated()")
+    public void create(@RequestBody @Valid RestTaskListForm form, Authentication authentication){
+        taskListService.create(form, authentication.getName());
     }
     
     @PutMapping("/{id:[0-9]+}")
-    public void update(@RequestBody @Valid TaskListForm form, @PathVariable Long id){
+    @PreAuthorize("isAuthenticated()")
+    public void update(@RequestBody @Valid RestTaskListForm form, @PathVariable Long id, Authentication authentication){
+        if(!taskListService.getOne(id).get().getOwnerEntity().getLogin().equals(authentication.getName()))
+            throw new RuntimeException("Not authorized");
         taskListService.update(id, form);
     }
     
     @DeleteMapping("/{id:[0-9]+}")
-    public void delete(@PathVariable Long id){
+    @PreAuthorize("isAuthenticated()")
+    public void delete(@PathVariable Long id, Authentication authentication){
+        if(!taskListService.getOne(id).get().getOwnerEntity().getLogin().equals(authentication.getName()))
+            throw new RuntimeException("Not authorized");
         taskListService.delete(id);
     }
 }
