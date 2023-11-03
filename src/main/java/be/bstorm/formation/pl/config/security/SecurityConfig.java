@@ -30,8 +30,9 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> {
                     request
-                            .anyRequest().permitAll()
-                            .requestMatchers( r -> r.getRequestURI().length() > 500 ).denyAll();
+                            .requestMatchers( r -> r.getRequestURI().length() > 500 ).denyAll()
+                            .anyRequest().permitAll();
+
                 });
         
 
