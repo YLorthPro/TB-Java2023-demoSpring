@@ -37,8 +37,7 @@ public class UserServiceImpl implements UserService {
     public Auth login(LoginForm form) {
         authenticationManager.authenticate( new UsernamePasswordAuthenticationToken(form.getLogin(),form.getPassword()) );
 
-        UserEntity userEntity = userRepository.findByLogin(form.getLogin() )
-                .orElseThrow();
+        UserEntity userEntity = userRepository.findByLogin(form.getLogin() ).get();
 
         String token = jwtProvider.generateToken(userEntity.getUsername(), List.copyOf(userEntity.getRoles()) );
 

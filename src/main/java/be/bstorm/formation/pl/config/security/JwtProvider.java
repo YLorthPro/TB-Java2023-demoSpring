@@ -21,7 +21,6 @@ import java.util.List;
 public class JwtProvider {
 
     private static final String JWT_SECRET = "UTC.ZO\"7%0u7.ieT_f`nsQd)8Z',yp/7k[N;#D%zgrY\"z{Bheg04(O)\"H&~W\"Jv";
-    //Expired time: 15 minutes
     private static final long EXPIRES_AT = 900_000;
     private static final String AUTH_HEADER = "Authorization";
     private static final String TOKEN_PREFIX = "Bearer ";
@@ -55,22 +54,18 @@ public class JwtProvider {
     public boolean validateToken(String token){
 
         try {
-            // 1, Le bon secret a été utilisé (et le meme algo)
-            // 2, pas expiré
             DecodedJWT jwt = JWT.require( Algorithm.HMAC512(JWT_SECRET) )
                     .acceptExpiresAt( EXPIRES_AT )
                     .withClaimPresence("sub")
                     .withClaimPresence("roles")
                     .build()
                     .verify( token );
-
-            // 3, généré a partir d'un userEntity existant
+            
             String username = jwt.getSubject();
             UserEntity userEntity = (UserEntity) userDetailsService.loadUserByUsername(username);
             if( !userEntity.isEnabled() )
                 return false;
-
-            // (4, Les roles ne sont plus bon) Verifier les roles n'est pas conventionnel
+            
             List<UserRole> tokenRoles = jwt.getClaim("roles")
                     .asList(UserRole.class);
 
